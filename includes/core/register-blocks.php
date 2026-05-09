@@ -9,6 +9,12 @@ function aos_register_blocks(): void
         AOS_PLUGIN_PATH .
         'src/blocks/product-grid'
     );
+
+    register_block_type(
+        AOS_PLUGIN_PATH .
+        'src/blocks/product-carousel'
+    );
+
 }
 
 add_action(

@@ -1,0 +1,24 @@
+{
+  "apiVersion": 3,
+  "name": "aos/product-carousel",
+  "title": "AOS Product Carousel",
+  "category": "widgets",
+  "icon": "images-alt2",
+  "description": "Carrusel moderno WooCommerce.",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "render": "file:./render.php",
+  "attributes": {
+    "productsToShow": {
+      "type": "number",
+      "default": 8
+    },
+    "queryType": {
+      "type": "string",
+      "default": "recent"
+    }
+  }
+}

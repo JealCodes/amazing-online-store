@@ -14,6 +14,7 @@
     "@wordpress/scripts": "^32.1.0"
   },
   "dependencies": {
-    "aos": "^2.3.4"
+    "aos": "^2.3.4",
+    "swiper": "^12.1.4"
   }
 }

@@ -1,0 +1,41 @@
+.aos-product-carousel .swiper-slide{
+
+    height:auto;
+}
+
+.aos-product-carousel{
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.aos-product-carousel .swiper-button-next,
+.aos-product-carousel .swiper-button-prev{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:999px;
+
+    background:#ffffff;
+
+    box-shadow:
+        0 6px 20px rgba(0,0,0,.12);
+}
+
+.aos-product-carousel .swiper-button-next::after,
+.aos-product-carousel .swiper-button-prev::after{
+
+    font-size:18px;
+
+    color:#111111;
+}
+
+.aos-product-carousel .swiper-pagination{
+
+    position:relative;
+
+    margin-top:24px;
+}

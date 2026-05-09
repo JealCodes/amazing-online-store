@@ -15,11 +15,25 @@ function aos_enqueue_assets(): void
         'aos-global-script',
 
         AOS_PLUGIN_URL .
-        'build/index.js',
+            'build/index.js',
 
         $asset_file['dependencies'],
 
         $asset_file['version'],
+
+        true
+    );
+
+    wp_enqueue_script(
+
+        'aos-swiper',
+
+        AOS_PLUGIN_URL .
+            'assets/js/swiper.js',
+
+        [],
+
+        AOS_VERSION,
 
         true
     );
