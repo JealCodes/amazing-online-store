@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Plugin Name: Amazing Online Store
  * Description: Framework moderno de bloques WooCommerce para Gutenberg.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: JealDevs
  * License: GPL2
  */
