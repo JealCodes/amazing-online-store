@@ -1,0 +1,19 @@
+{
+  "name": "amazing-online-store",
+  "version": "0.1.0",
+  "description": "Framework moderno de bloques WooCommerce.",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "author": "JealDevs",
+  "license": "GPL2",
+  "main": "index.js",
+  "keywords": [],
+  "devDependencies": {
+    "@wordpress/scripts": "^32.1.0"
+  },
+  "dependencies": {
+    "aos": "^2.3.4"
+  }
+}

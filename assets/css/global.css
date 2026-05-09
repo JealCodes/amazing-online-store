@@ -1,0 +1,202 @@
+/*
+|--------------------------------------------------------------------------
+| GRID
+|--------------------------------------------------------------------------
+*/
+
+.aos-product-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(var(--aos-columns, 4),
+            1fr);
+
+    gap: var(--aos-grid-gap, 24px);
+}
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCT CARD
+|--------------------------------------------------------------------------
+*/
+
+.aos-product-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius:
+        var(--aos-card-radius, 18px);
+
+    background:
+        var(--aos-card-bg, #ffffff);
+
+    border:
+        var(--aos-card-border-width, 0px) solid var(--aos-card-border-color, #e5e7eb);
+
+    box-shadow:
+        var(--aos-card-shadow);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+    will-change: transform;
+
+    height: 100%;
+}
+
+.aos-product-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        var(--aos-card-shadow);
+}
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCT LINK
+|--------------------------------------------------------------------------
+*/
+
+.aos-product-card a {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex:1;
+
+    gap: 14px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    height: 100%;
+
+    padding:
+        var(--aos-card-padding-y, 18px) var(--aos-card-padding-x, 18px);
+}
+
+/*
+|--------------------------------------------------------------------------
+| IMAGE
+|--------------------------------------------------------------------------
+*/
+
+.aos-product-card img {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform .5s ease;
+}
+
+.aos-product-card:hover img {
+
+    transform: scale(1.04);
+}
+
+/*
+|--------------------------------------------------------------------------
+| CONTENT
+|--------------------------------------------------------------------------
+*/
+
+.aos-product-card h3 {
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    margin: 0;
+
+}
+
+.aos-product-card span {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+.aos-product-card .price{
+
+    margin-top:auto;
+    
+}
+
+/*
+|--------------------------------------------------------------------------
+| BUTTONS
+|--------------------------------------------------------------------------
+*/
+
+.aos-product-card .button {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    border: none;
+
+    border-radius:
+        var(--aos-button-radius, 12px);
+
+    background:
+        var(--aos-button-bg, #111111);
+
+    color:
+        var(--aos-button-text, #ffffff);
+
+    padding:
+        var(--aos-button-padding-y, 12px) var(--aos-button-padding-x, 22px);
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+
+    margin-top: auto;
+}
+
+.aos-product-card .button:hover {
+
+    transform: translateY(-2px);
+
+    opacity: .92;
+}
+
+@media(max-width:1024px) {
+
+    .aos-product-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media(max-width:640px) {
+
+    .aos-product-grid {
+
+        grid-template-columns: 1fr;
+    }
+}
