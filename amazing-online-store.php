@@ -8,6 +8,8 @@ declare(strict_types=1);
  * Version: 0.1.1
  * Author: JealDevs
  * License: GPL2
+ * GitHub Plugin URI: JealCodes/amazing-online-store
+ * Primary Branch: main
  */
 
 if (!defined('ABSPATH')) {
@@ -29,6 +31,35 @@ define(
     'AOS_PLUGIN_PATH',
     plugin_dir_path(__FILE__)
 );
+
+define(
+    'AOS_VERSION',
+    '0.1.1'
+);
+
+/*
+|--------------------------------------------------------------------------
+| GitHub Updates
+|--------------------------------------------------------------------------
+*/
+
+require_once
+    AOS_PLUGIN_PATH .
+    'includes/libs/plugin-update-checker/plugin-update-checker.php';
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$updateChecker =
+    PucFactory::buildUpdateChecker(
+
+        'https://github.com/JealCodes/amazing-online-store/',
+
+        __FILE__,
+
+        'amazing-online-store'
+    );
+
+$updateChecker->setBranch('main');
 
 /*
 |--------------------------------------------------------------------------
