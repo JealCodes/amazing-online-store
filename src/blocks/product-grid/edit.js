@@ -17,6 +17,8 @@ import {
 
 } from '@wordpress/components';
 
+import QueryPanel from '../../components/panels/QueryPanel';
+
 export default function Edit({
 
     attributes,
@@ -28,9 +30,40 @@ export default function Edit({
     const {
 
         columns,
-        productsToShow
+        productsToShow,
+        queryType
 
     } = attributes;
+
+    /*
+    |--------------------------------------------------------------------------
+    | QUERY ARGS
+    |--------------------------------------------------------------------------
+    */
+
+    const queryArgs = {
+
+        per_page: productsToShow,
+
+        _embed: true
+    };
+
+    /*
+    |--------------------------------------------------------------------------
+    | QUERY TYPES
+    |--------------------------------------------------------------------------
+    */
+
+    if (queryType === 'featured') {
+
+        queryArgs.featured = true;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCTS
+    |--------------------------------------------------------------------------
+    */
 
     const products = useSelect(
 
@@ -42,15 +75,40 @@ export default function Edit({
 
                 'product',
 
-                {
-                    per_page: productsToShow,
-                    _embed: true
-                }
+                queryArgs
             );
         },
 
-        [productsToShow]
+        [
+
+            productsToShow,
+            queryType
+        ]
     );
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOADING
+    |--------------------------------------------------------------------------
+    */
+
+    if (!products) {
+
+        return (
+
+            <p>
+
+                Loading products...
+
+            </p>
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | RENDER
+    |--------------------------------------------------------------------------
+    */
 
     return (
 
@@ -60,23 +118,24 @@ export default function Edit({
 
                 <PanelBody
                     title="Grid Settings"
+                    initialOpen={ true }
                 >
 
                     <RangeControl
 
                         label="Columns"
 
-                        value={columns}
+                        value={ columns }
 
-                        min={1}
+                        min={ 1 }
 
-                        max={6}
+                        max={ 6 }
 
-                        onChange={(value) =>
+                        onChange={ (value) =>
 
                             setAttributes({
 
-                                columns:value
+                                columns: value
                             })
                         }
                     />
@@ -85,22 +144,31 @@ export default function Edit({
 
                         label="Products"
 
-                        value={productsToShow}
+                        value={ productsToShow }
 
-                        min={1}
+                        min={ 1 }
 
-                        max={20}
+                        max={ 20 }
 
-                        onChange={(value) =>
+                        onChange={ (value) =>
 
                             setAttributes({
 
-                                productsToShow:value
+                                productsToShow: value
                             })
                         }
                     />
 
                 </PanelBody>
+
+                <QueryPanel
+
+                    attributes={ attributes }
+
+                    setAttributes={
+                        setAttributes
+                    }
+                />
 
             </InspectorControls>
 
@@ -108,77 +176,103 @@ export default function Edit({
 
                 style={{
 
-                    display:'grid',
+                    display: 'grid',
 
                     gridTemplateColumns:
-                        `repeat(${columns},1fr)`,
+                        `repeat(${columns}, 1fr)`,
 
-                    gap:'24px'
+                    gap: '24px'
                 }}
             >
 
-                {products?.map((product) => (
+                {products.map((product) => {
 
-                    <div
+                    const image =
+                        product?._embedded
+                            ?.['wp:featuredmedia']
+                            ?.[0]
+                            ?.source_url;
 
-                        key={product.id}
-
-                        style={{
-
-                            border:'1px solid #ddd',
-
-                            borderRadius:'14px',
-
-                            overflow:'hidden',
-
-                            background:'#fff'
-                        }}
-                    >
-
-                        {product?.featured_media && (
-
-                            <img
-
-                                src={
-                                    product?._embedded
-                                    ?.['wp:featuredmedia']
-                                    ?.[0]
-                                    ?.source_url
-                                }
-
-                                alt={product.title.rendered}
-
-                                style={{
-
-                                    width:'100%',
-
-                                    height:'240px',
-
-                                    objectFit:'cover'
-                                }}
-                            />
-                        )}
+                    return (
 
                         <div
+
+                            key={ product.id }
+
                             style={{
 
-                                padding:'16px'
+                                border: '1px solid #ddd',
+
+                                borderRadius: '14px',
+
+                                overflow: 'hidden',
+
+                                background: '#fff'
                             }}
                         >
 
-                            <h3>
+                            {image ? (
 
-                                {
-                                    product.title.rendered
-                                }
+                                <img
 
-                            </h3>
+                                    src={ image }
+
+                                    alt={
+                                        product.title.rendered
+                                    }
+
+                                    style={{
+
+                                        width: '100%',
+
+                                        height: '240px',
+
+                                        objectFit: 'cover'
+                                    }}
+                                />
+
+                            ) : (
+
+                                <div
+
+                                    style={{
+
+                                        height: '240px',
+
+                                        background: '#f3f3f3'
+                                    }}
+                                />
+                            )}
+
+                            <div
+
+                                style={{
+
+                                    padding: '16px'
+                                }}
+                            >
+
+                                <h3
+
+                                    style={{
+
+                                        margin: 0,
+
+                                        fontSize: '16px'
+                                    }}
+                                >
+
+                                    {
+                                        product.title.rendered
+                                    }
+
+                                </h3>
+
+                            </div>
 
                         </div>
-
-                    </div>
-
-                ))}
+                    );
+                })}
 
             </div>
 

@@ -1,6 +1,6 @@
 {
   "name": "amazing-online-store",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Framework moderno de bloques WooCommerce.",
   "scripts": {
     "build": "wp-scripts build",
