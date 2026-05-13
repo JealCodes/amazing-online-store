@@ -1,5 +1,11 @@
 import {
 
+    useSelect
+
+} from '@wordpress/data';
+
+import {
+
     InspectorControls
 
 } from '@wordpress/block-editor';
@@ -11,19 +17,40 @@ import {
 
 } from '@wordpress/components';
 
-import AnimationPanel from '../../components/panels/AnimationPanel';
-import TypographyPanel from '../../components/panels/TypographyPanel';
-import SpacingPanel from '../../components/panels/SpacingPanel';
-import StylePanel from '../../components/panels/StylePanel';
-import ButtonPanel from '../../components/panels/ButtonPanel';
-import QueryPanel from '../../components/panels/QueryPanel';
-
 export default function Edit({
 
     attributes,
+
     setAttributes
 
 }) {
+
+    const {
+
+        columns,
+        productsToShow
+
+    } = attributes;
+
+    const products = useSelect(
+
+        (select) => {
+
+            return select('core').getEntityRecords(
+
+                'postType',
+
+                'product',
+
+                {
+                    per_page: productsToShow,
+                    _embed: true
+                }
+            );
+        },
+
+        [productsToShow]
+    );
 
     return (
 
@@ -32,150 +59,126 @@ export default function Edit({
             <InspectorControls>
 
                 <PanelBody
-                    title="Productos"
-                    initialOpen={true}
+                    title="Grid Settings"
                 >
 
                     <RangeControl
 
-                        label="Productos"
+                        label="Columns"
 
-                        value={attributes.productsToShow}
-
-                        onChange={(value) =>
-
-                            setAttributes({
-                                productsToShow: value
-                            })
-                        }
-
-                        min={1}
-
-                        max={24}
-                    />
-
-                    <RangeControl
-
-                        label="Columnas"
-
-                        value={attributes.columns}
-
-                        onChange={(value) =>
-
-                            setAttributes({
-                                columns: value
-                            })
-                        }
+                        value={columns}
 
                         min={1}
 
                         max={6}
+
+                        onChange={(value) =>
+
+                            setAttributes({
+
+                                columns:value
+                            })
+                        }
+                    />
+
+                    <RangeControl
+
+                        label="Products"
+
+                        value={productsToShow}
+
+                        min={1}
+
+                        max={20}
+
+                        onChange={(value) =>
+
+                            setAttributes({
+
+                                productsToShow:value
+                            })
+                        }
                     />
 
                 </PanelBody>
 
-                <AnimationPanel
-
-                    attributes={attributes}
-
-                    setAttributes={setAttributes}
-                />
-
-                <TypographyPanel
-
-                    title="Título de producto"
-
-                    attributes={attributes}
-
-                    setAttributes={setAttributes}
-
-                    fontSizeKey="titleFontSize"
-
-                    fontWeightKey="titleFontWeight"
-
-                    textColorKey="titleTextColor"
-                />
-
-                <SpacingPanel
-
-                    title="Espaciado del grid"
-
-                    attributes={attributes}
-
-                    setAttributes={setAttributes}
-
-                    paddingVerticalKey="cardPaddingVertical"
-
-                    paddingHorizontalKey="cardPaddingHorizontal"
-
-                    gapKey="gridGap"
-                />
-
-                <StylePanel
-
-                    title="Estilo de cards"
-
-                    attributes={attributes}
-
-                    setAttributes={setAttributes}
-
-                    radiusKey="cardRadius"
-
-                    backgroundKey="cardBackground"
-
-                    borderWidthKey="cardBorderWidth"
-
-                    borderColorKey="cardBorderColor"
-
-                    shadowKey="cardShadow"
-                />
-
-                <ButtonPanel
-
-                    attributes={attributes}
-
-                    setAttributes={setAttributes}
-                />
-
-                <QueryPanel
-
-                    attributes={attributes}
-
-                    setAttributes={setAttributes}
-                />
-
             </InspectorControls>
 
             <div
+
                 style={{
 
-                    padding: '40px',
+                    display:'grid',
 
-                    border: '1px solid #ddd',
+                    gridTemplateColumns:
+                        `repeat(${columns},1fr)`,
 
-                    borderRadius: '12px'
+                    gap:'24px'
                 }}
             >
 
-                <h3>
+                {products?.map((product) => (
 
-                    AOS Product Grid
+                    <div
 
-                </h3>
+                        key={product.id}
 
-                <p>
+                        style={{
 
-                    Productos:
-                    {attributes.productsToShow}
+                            border:'1px solid #ddd',
 
-                </p>
+                            borderRadius:'14px',
 
-                <p>
+                            overflow:'hidden',
 
-                    Columnas:
-                    {attributes.columns}
+                            background:'#fff'
+                        }}
+                    >
 
-                </p>
+                        {product?.featured_media && (
+
+                            <img
+
+                                src={
+                                    product?._embedded
+                                    ?.['wp:featuredmedia']
+                                    ?.[0]
+                                    ?.source_url
+                                }
+
+                                alt={product.title.rendered}
+
+                                style={{
+
+                                    width:'100%',
+
+                                    height:'240px',
+
+                                    objectFit:'cover'
+                                }}
+                            />
+                        )}
+
+                        <div
+                            style={{
+
+                                padding:'16px'
+                            }}
+                        >
+
+                            <h3>
+
+                                {
+                                    product.title.rendered
+                                }
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                ))}
 
             </div>
 
