@@ -78,6 +78,24 @@ function aos_enqueue_assets(): void
 
         $swiper_asset['version']
     );
+
+    /*
+    |--------------------------------------------------------------------------
+    | GLOBAL CSS
+    |--------------------------------------------------------------------------
+    */
+
+    wp_enqueue_style(
+
+        'aos-global-style',
+
+        AOS_PLUGIN_URL .
+            'build/index.css',
+
+        [],
+
+        AOS_VERSION
+    );
 }
 
 add_action(

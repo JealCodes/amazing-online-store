@@ -41,20 +41,50 @@ ob_start();
     class="aos-product-grid"
 
     style="
-        --aos-grid-gap: <?php echo intval($attributes['gridGap'] ?? 24); ?>px;
-        --aos-card-padding-y: <?php echo intval($attributes['cardPaddingVertical'] ?? 18); ?>px;
-        --aos-card-padding-x: <?php echo intval($attributes['cardPaddingHorizontal'] ?? 18); ?>px;
-        --aos-card-radius: <?php echo intval($attributes['cardRadius'] ?? 18); ?>px;
-        --aos-card-bg: <?php echo esc_attr($attributes['cardBackground'] ?? '#ffffff'); ?>;
-        --aos-card-border-width: <?php echo intval($attributes['cardBorderWidth'] ?? 0); ?>px;
-        --aos-card-border-color: <?php echo esc_attr($attributes['cardBorderColor'] ?? '#e5e7eb'); ?>;
-        --aos-card-shadow: <?php echo esc_attr($shadow); ?>;
-        --aos-button-radius: <?php echo intval($attributes['buttonRadius'] ?? 12); ?>px;
-        --aos-button-padding-y: <?php echo intval($attributes['buttonPaddingY'] ?? 12); ?>px;
-        --aos-button-padding-x: <?php echo intval($attributes['buttonPaddingX'] ?? 22); ?>px;
-        --aos-button-bg: <?php echo esc_attr($attributes['buttonBg'] ?? '#111111'); ?>;
-        --aos-button-text: <?php echo esc_attr($attributes['buttonTextColor'] ?? '#ffffff'); ?>;
-    ">
+        --aos-grid-gap: 
+            <?php echo intval($attributes['gridGap'] ?? 24); ?>px;
+            
+        --aos-grid-columns: 
+            repeat( <?php echo intval($attributes['columns'] ?? 4); ?>, minmax(0,1fr) );
+
+        --aos-card-padding-y:
+            <?php echo intval($attributes['cardPaddingVertical'] ?? 18); ?>px;
+
+        --aos-card-padding-x:
+            <?php echo intval($attributes['cardPaddingHorizontal'] ?? 18); ?>px;
+
+        --aos-card-radius:
+            <?php echo intval($attributes['cardRadius'] ?? 18); ?>px;
+
+        --aos-card-bg:
+            <?php echo esc_attr($attributes['cardBackground'] ?? '#ffffff'); ?>;
+
+        --aos-card-border-width:
+            <?php echo intval($attributes['cardBorderWidth'] ?? 0); ?>px;
+
+        --aos-card-border-color:
+            <?php echo esc_attr($attributes['cardBorderColor'] ?? '#e5e7eb'); ?>;
+
+        --aos-card-shadow:
+            <?php echo esc_attr($shadow); ?>;
+
+        --aos-button-radius:
+            <?php echo intval($attributes['buttonRadius'] ?? 12); ?>px;
+
+        --aos-button-padding-y:
+            <?php echo intval($attributes['buttonPaddingY'] ?? 12); ?>px;
+
+        --aos-button-padding-x:
+            <?php echo intval($attributes['buttonPaddingX'] ?? 22); ?>px;
+
+        --aos-button-bg:
+            <?php echo esc_attr($attributes['buttonBg'] ?? '#111111'); ?>;
+
+        --aos-button-text:
+            <?php echo esc_attr($attributes['buttonTextColor'] ?? '#ffffff'); ?>;
+    "
+
+>
 
     <?php while ($query->have_posts()) :
 
@@ -67,7 +97,9 @@ ob_start();
 
             class="aos-product-card"
 
-            <?php echo $animation_attrs; ?>>
+            <?php echo $animation_attrs; ?>
+
+        >
 
             <div class="aos-product-card-inner">
 
@@ -75,17 +107,21 @@ ob_start();
 
                     href="<?php the_permalink(); ?>"
 
-                    class="aos-product-link">
+                    class="aos-product-link"
+
+                >
 
                     <?php echo woocommerce_get_product_thumbnail(); ?>
 
                     <h3
 
                         style="
-                        font-size: <?php echo intval($attributes['titleFontSize'] ?? 18); ?>px;
-                        font-weight: <?php echo esc_attr($attributes['titleFontWeight'] ?? '600'); ?>;
-                        color: <?php echo esc_attr($attributes['titleTextColor'] ?? '#111111'); ?>;
-                    ">
+                            font-size: <?php echo intval($attributes['titleFontSize'] ?? 18); ?>px;
+                            font-weight: <?php echo esc_attr($attributes['titleFontWeight'] ?? '600'); ?>;
+                            color: <?php echo esc_attr($attributes['titleTextColor'] ?? '#111111'); ?>;
+                        "
+
+                    >
 
                         <?php the_title(); ?>
 
@@ -119,4 +155,4 @@ ob_start();
 
 wp_reset_postdata();
 
-return ob_get_clean();
+echo ob_get_clean();

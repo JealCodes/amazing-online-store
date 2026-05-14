@@ -8,9 +8,7 @@
 
     display: grid;
 
-    grid-template-columns:
-        repeat(var(--aos-columns, 4),
-            1fr);
+    grid-template-columns: var(--aos-grid-columns);
 
     gap: var(--aos-grid-gap, 24px);
 }
