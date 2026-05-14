@@ -5,37 +5,78 @@ declare(strict_types=1);
 function aos_enqueue_assets(): void
 {
 
-    $asset_file =
+    /*
+    |--------------------------------------------------------------------------
+    | AOS
+    |--------------------------------------------------------------------------
+    */
+
+    $aos_asset =
         include
         AOS_PLUGIN_PATH .
-        'build/index.asset.php';
+        'build/aos.asset.php';
 
     wp_enqueue_script(
 
-        'aos-global-script',
+        'aos-frontend',
 
         AOS_PLUGIN_URL .
-            'build/index.js',
+            'build/aos.js',
 
-        $asset_file['dependencies'],
+        $aos_asset['dependencies'],
 
-        $asset_file['version'],
+        $aos_asset['version'],
 
         true
     );
+
+    wp_enqueue_style(
+
+        'aos-frontend-style',
+
+        AOS_PLUGIN_URL .
+            'build/aos.css',
+
+        [],
+
+        $aos_asset['version']
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | SWIPER
+    |--------------------------------------------------------------------------
+    */
+
+    $swiper_asset =
+        include
+        AOS_PLUGIN_PATH .
+        'build/swiper.asset.php';
 
     wp_enqueue_script(
 
         'aos-swiper',
 
         AOS_PLUGIN_URL .
-            'assets/js/swiper.js',
+            'build/swiper.js',
+
+        $swiper_asset['dependencies'],
+
+        $swiper_asset['version'],
+
+        true
+    );
+
+    wp_enqueue_style(
+
+        'aos-swiper-style',
+
+        AOS_PLUGIN_URL .
+            'build/swiper.css',
 
         [],
 
-        AOS_VERSION,
-
-        true
+        $swiper_asset['version']
     );
 }
 

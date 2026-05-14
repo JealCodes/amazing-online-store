@@ -9,8 +9,7 @@ if (!class_exists('WooCommerce')) {
     return '<p>WooCommerce no está activo.</p>';
 }
 
-$query =
-    aos_get_products_query($attributes);
+$query = aos_get_products_query($attributes);
 
 if (!$query->have_posts()) {
 
@@ -70,33 +69,45 @@ ob_start();
 
             <?php echo $animation_attrs; ?>>
 
-            <a href="<?php the_permalink(); ?>">
+            <div class="aos-product-card-inner">
 
-                <?php echo woocommerce_get_product_thumbnail(); ?>
+                <a
 
-                <h3
+                    href="<?php the_permalink(); ?>"
 
-                    style="
+                    class="aos-product-link">
+
+                    <?php echo woocommerce_get_product_thumbnail(); ?>
+
+                    <h3
+
+                        style="
                         font-size: <?php echo intval($attributes['titleFontSize'] ?? 18); ?>px;
                         font-weight: <?php echo esc_attr($attributes['titleFontWeight'] ?? '600'); ?>;
                         color: <?php echo esc_attr($attributes['titleTextColor'] ?? '#111111'); ?>;
                     ">
 
-                    <?php the_title(); ?>
+                        <?php the_title(); ?>
 
-                </h3>
+                    </h3>
 
-                <span>
+                    <span>
 
-                    <?php echo $product->get_price_html(); ?>
+                        <?php echo $product->get_price_html(); ?>
 
-                </span>
+                    </span>
 
-                <?php 
+                </a>
+
+                <div class="aos-product-cart">
+
+                    <?php
                     woocommerce_template_loop_add_to_cart();
-                ?>
+                    ?>
 
-            </a>
+                </div>
+
+            </div>
 
         </div>
 
