@@ -1,0 +1,173 @@
+.aos-product-card {
+
+    position: relative;
+
+    background:
+        var(--aos-card-bg, #fff);
+
+    border-radius:
+        var(--aos-card-radius, 18px);
+
+    overflow: hidden;
+
+    border:
+        var(--aos-card-border-width, 0px)
+        solid
+        var(--aos-card-border-color, #e5e7eb);
+
+    box-shadow:
+        var(--aos-card-shadow);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+    height: 100%;
+}
+
+.aos-product-card:hover {
+
+    transform:
+        translateY(-6px);
+}
+
+.aos-product-card-inner {
+
+    display: flex;
+
+    flex-direction: column;
+
+    height: 100%;
+}
+
+.aos-product-image-wrapper {
+
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 1 / 1;
+}
+
+.aos-product-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .5s ease;
+}
+
+.aos-product-card:hover
+.aos-product-image {
+
+    transform: scale(1.06);
+}
+
+.aos-product-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    padding:
+        var(--aos-card-padding-y, 18px)
+        var(--aos-card-padding-x, 18px);
+
+    flex-grow: 1;
+}
+
+.aos-product-title {
+
+    margin: 0;
+
+    line-height: 1.4;
+}
+
+.aos-product-prices {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.aos-product-regular-price {
+
+    opacity: .5;
+
+    text-decoration: line-through;
+}
+
+.aos-product-price {
+
+    font-weight: 700;
+}
+
+.aos-sale-badge {
+
+    position: absolute;
+
+    top: 14px;
+
+    left: 14px;
+
+    z-index: 5;
+
+    background: #ef4444;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+}
+
+.aos-product-button {
+
+    margin-top: auto;
+
+    width: 100%;
+
+    border: none;
+
+    cursor: pointer;
+
+    border-radius:
+        var(--aos-button-radius, 12px);
+
+    padding:
+        var(--aos-button-padding-y, 12px)
+        var(--aos-button-padding-x, 22px);
+
+    background:
+        var(--aos-button-bg, #111);
+
+    color:
+        var(--aos-button-text, #fff);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+.aos-product-button:hover {
+
+    opacity: .9;
+
+    transform: translateY(-2px);
+}
